@@ -68,9 +68,12 @@ public class BFSChromosome extends Chromosome {
             // if no valid merges were found within the neighbourhood of the 'from' node
             // randomly select a new 'from' node and corresponding 'to' node
             while (duplicateGene(tempGene) || graph.sameCluster(from, to)) {
+                // hold the value of from, in case the next is invalid -- for now use tempGene[0]
                 from = this.RANDOM.nextInt(graph.getSize());
                 possibleNeighbors = graph.bfs(from, this.maxDepth);
                 if (possibleNeighbors.size() < 1) {
+                    // replace the value of from with the original value, currently in tempGene[0]
+                    from = tempGene[0];
                     continue;
                 }
                 to = possibleNeighbors.get(this.RANDOM.nextInt(possibleNeighbors.size()));

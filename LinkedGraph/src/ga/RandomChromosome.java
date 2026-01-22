@@ -71,8 +71,10 @@ public class RandomChromosome extends Chromosome {
             // randomly select a new 'from' node and corresponding 'to' node
             while (duplicateGene(tempGene) || graph.sameCluster(from, to)) {
                 from = this.RANDOM.nextInt(graph.getSize());
-                possibleNeighbors = graph.bfs(from, this.maxDepth);
+                possibleNeighbors = graph.randomAddBFS(from, this.maxDepth, this.RANDOM);
                 if (possibleNeighbors.size() < 1) {
+                    // replace the value of from with the original value, currently in tempGene[0]
+                    from = tempGene[0];
                     continue;
                 }
                 to = possibleNeighbors.get(this.RANDOM.nextInt(possibleNeighbors.size()));
