@@ -15,6 +15,8 @@ import linkedgraph.LinkedGraph;
 public class DisplayTests {
 
     public static void main(String args[]) {
+
+        
         LinkedGraph ecoli = LinkedGraph.load("./ecoli.txt");
         LinkedGraph figeys = LinkedGraph.load("./figeys.txt");
         LinkedGraph yeast = LinkedGraph.load("./yeast.txt");

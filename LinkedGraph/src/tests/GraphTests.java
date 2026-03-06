@@ -32,67 +32,67 @@ public class GraphTests {
         String[][] fakeEdgeTests = new String[][]{
             /* 2 edges, 3 nodes */
             // edge to root
-            {"test/test1.txt", "1", "[(0,1)]"},
+            {"LinkedGraph/test/test1.txt", "1", "[(0,1)]"},
             // root to edge
-            {"test/test1.txt", "1", "[(0,1)]"},
+            {"LinkedGraph/test/test1.txt", "1", "[(0,1)]"},
             // edge to edge
-            {"test/test1.txt", "1", "[(0,2)]"},
+            {"LinkedGraph/test/test1.txt", "1", "[(0,2)]"},
             // opposite edge to edge
-            {"test/test1.txt", "1", "[(2,1)]"},
+            {"LinkedGraph/test/test1.txt", "1", "[(2,1)]"},
             /* star, continuously add edges */
-            {"test/test2.txt", "1", "[(1,1)]"},
-            {"test/test2.txt", "3", "[(1,1),(2,1)]"},
-            {"test/test2.txt", "6", "[(1,1),(2,1),(3,1)]"},
-            {"test/test2.txt", "6", "[(1,1),(2,1),(3,1),(4,1)]"},
+            {"LinkedGraph/test/test2.txt", "1", "[(1,1)]"},
+            {"LinkedGraph/test/test2.txt", "3", "[(1,1),(2,1)]"},
+            {"LinkedGraph/test/test2.txt", "6", "[(1,1),(2,1),(3,1)]"},
+            {"LinkedGraph/test/test2.txt", "6", "[(1,1),(2,1),(3,1),(4,1)]"},
             /* star, root to edges*/
-            {"test/test2.txt", "3", "[(0,1)]"},
-            {"test/test2.txt", "5", "[(0,1),(1,1)]"},
-            {"test/test2.txt", "6", "[(0,1),(1,1),(2,1)]"},
-            {"test/test2.txt", "6", "[(0,1),(1,1),(2,1),(3,1)]"},
+            {"LinkedGraph/test/test2.txt", "3", "[(0,1)]"},
+            {"LinkedGraph/test/test2.txt", "5", "[(0,1),(1,1)]"},
+            {"LinkedGraph/test/test2.txt", "6", "[(0,1),(1,1),(2,1)]"},
+            {"LinkedGraph/test/test2.txt", "6", "[(0,1),(1,1),(2,1),(3,1)]"},
             /* star, root to edge and edge to edge*/
-            {"test/test2.txt", "4", "[(0,1),(2,1)]"},
+            {"LinkedGraph/test/test2.txt", "4", "[(0,1),(2,1)]"},
             /* line with loops at the end*/
             // edge to root
-            {"test/test3.txt", "1", "[(0,2)]"},
-            {"test/test3.txt", "2", "[(0,2),(1,1)]"},
+            {"LinkedGraph/test/test3.txt", "1", "[(0,2)]"},
+            {"LinkedGraph/test/test3.txt", "2", "[(0,2),(1,1)]"},
             // edge to edge
-            {"test/test3.txt", "0", "[(0,1)]"},
-            {"test/test3.txt", "0", "[(0,1),(7,1)]"},
+            {"LinkedGraph/test/test3.txt", "0", "[(0,1)]"},
+            {"LinkedGraph/test/test3.txt", "0", "[(0,1),(7,1)]"},
             // merged edges to root
-            {"test/test3.txt", "2", "[(0,1),(7,1),(1,1)]"},
-            {"test/test3.txt", "4", "[(0,1),(7,1),(1,1),(6,1)]"},
+            {"LinkedGraph/test/test3.txt", "2", "[(0,1),(7,1),(1,1)]"},
+            {"LinkedGraph/test/test3.txt", "4", "[(0,1),(7,1),(1,1),(6,1)]"},
             // line to root
-            {"test/test3.txt", "3", "[(2,1)]"},
-            {"test/test3.txt", "3", "[(2,1),(0,1)]"},
-            {"test/test3.txt", "5", "[(2,1),(0,1),(1,1)]"},
+            {"LinkedGraph/test/test3.txt", "3", "[(2,1)]"},
+            {"LinkedGraph/test/test3.txt", "3", "[(2,1),(0,1)]"},
+            {"LinkedGraph/test/test3.txt", "5", "[(2,1),(0,1),(1,1)]"},
             /* some kind of carbine looking graph*/
-            {"test/test4.txt", "4", "[(0,1)]"},
-            {"test/test4.txt", "5", "[(0,1),(2,1)]"},
-            {"test/test4.txt", "2", "[(4,2)]"},
-            {"test/test4.txt", "5", "[(0,6)]"},
+            {"LinkedGraph/test/test4.txt", "4", "[(0,1)]"},
+            {"LinkedGraph/test/test4.txt", "5", "[(0,1),(2,1)]"},
+            {"LinkedGraph/test/test4.txt", "2", "[(4,2)]"},
+            {"LinkedGraph/test/test4.txt", "5", "[(0,6)]"},
             /* C, 4 nodes 3 edges */
-            {"test/test5.txt", "1", "[(0,1)]"},
-            {"test/test5.txt", "3", "[(0,1),(1,1)]"},
-            {"test/test5.txt", "3", "[(0,1),(1,1),(2,1)]"},
+            {"LinkedGraph/test/test5.txt", "1", "[(0,1)]"},
+            {"LinkedGraph/test/test5.txt", "3", "[(0,1),(1,1)]"},
+            {"LinkedGraph/test/test5.txt", "3", "[(0,1),(1,1),(2,1)]"},
             // edges first
-            {"test/test5.txt", "3", "[(0,1),(2,1)]"},
-            {"test/test5.txt", "3", "[(0,1),(2,1),(1,1)]"},
+            {"LinkedGraph/test/test5.txt", "3", "[(0,1),(2,1)]"},
+            {"LinkedGraph/test/test5.txt", "3", "[(0,1),(2,1),(1,1)]"},
             // root first
-            {"test/test5.txt", "2", "[(1,1)]"},
-            {"test/test5.txt", "3", "[(1,1),(0,1)]"},
-            {"test/test5.txt", "3", "[(1,1),(0,1),(2,1)]"},
+            {"LinkedGraph/test/test5.txt", "2", "[(1,1)]"},
+            {"LinkedGraph/test/test5.txt", "3", "[(1,1),(0,1)]"},
+            {"LinkedGraph/test/test5.txt", "3", "[(1,1),(0,1),(2,1)]"},
             /* 6 node circle */
-            {"test/test6.txt", "5", "[(0,3)]"},
-            {"test/test6.txt", "8", "[(0,3),(2,3)]"},
-            {"test/test6.txt", "9", "[(0,3),(2,3),(0,1)]"},
-            {"test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1)]"},
+            {"LinkedGraph/test/test6.txt", "5", "[(0,3)]"},
+            {"LinkedGraph/test/test6.txt", "8", "[(0,3),(2,3)]"},
+            {"LinkedGraph/test/test6.txt", "9", "[(0,3),(2,3),(0,1)]"},
+            {"LinkedGraph/test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1)]"},
             // test that 5 (which contains 0,1,2,3) merged with 4 results in the same
-            {"test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(0,4)]"},
-            {"test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(1,3)]"},
-            {"test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(2,2)]"},
-            {"test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(3,1)]"},
-            {"test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(4,1)]"},
-            {"test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(5,5)]"}
+            {"LinkedGraph/test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(0,4)]"},
+            {"LinkedGraph/test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(1,3)]"},
+            {"LinkedGraph/test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(2,2)]"},
+            {"LinkedGraph/test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(3,1)]"},
+            {"LinkedGraph/test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(4,1)]"},
+            {"LinkedGraph/test/test6.txt", "9", "[(0,3),(2,3),(0,1),(1,1),(5,5)]"}
         };
         for (int i = 0; i < fakeEdgeTests.length; i++) {
             LinkedGraph graph = LinkedGraph.load(fakeEdgeTests[i][0]);
@@ -119,11 +119,11 @@ public class GraphTests {
         }
 
         String[][] comparisonTests = new String[][]{
-            {"test/test6.txt", 
+            {"LinkedGraph/test/test6.txt", 
                 "[(0,3),(2,3),(0,1),(1,1),(0,4)]",
                 "[(0,1),(1,1),(2,1),(3,1),(4,1)]"
             },
-            {"test/test6.txt", 
+            {"LinkedGraph/test/test6.txt", 
                 "[(0,3),(2,3),(0,1),(1,1)]",
                 "[(0,1),(1,1),(2,1),(3,2)]"
             }
