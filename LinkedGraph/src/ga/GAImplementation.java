@@ -59,6 +59,7 @@ public class GAImplementation {
 	private String TEST_TYPE; // runtime (reset seed for all runs) or performance (set seed at beginning only)
 	private boolean BFS_CACHE;
 	private double DEG_SELECT_RATE;
+	private int PRE_COMPRESS = 0;
 	private final String DEFAULT_OUTPUT = "";
 	private final float DEFAULT_RATE = -Float.MAX_VALUE;
 	private final int DEFAULT_SIZE = Integer.MIN_VALUE;
@@ -67,8 +68,8 @@ public class GAImplementation {
 	private Chromosome[] POPULATION;
 	private int[] POPULATION_FITNESS;
 
-	private static final String IN_DIRECTORY = "data/in/";
-	private static final String OUT_DIRECTORY = "data/out/";
+	private static final String IN_DIRECTORY = "LinkedGraph/data/in/";
+	private static final String OUT_DIRECTORY = "LinkedGraph/data/out/";
 
 	private Map<String, Integer> CACHED_CHROMOSOME_FITNESS;
 
@@ -161,6 +162,7 @@ public class GAImplementation {
 						+ "; Save Transformations: " + this.SAVE_TRANSFORM
 						+ "; Degree Select Rate: " + this.DEG_SELECT_RATE);
 				this.OUTPUT.newLine();
+				System.out.println("Output file created: " + OUT_DIRECTORY + this.OUTPUT_FILENAME);
 				// CSV Columns
 				this.OUTPUT.write("Run,"
 						+ "Generation,"
@@ -200,6 +202,26 @@ public class GAImplementation {
 			// initialize global settings
 			int globalWorstFitness = Integer.MIN_VALUE;
 			int globalBestFitness = Integer.MAX_VALUE;
+			
+			if (this.PRE_COMPRESS == 1) {
+				System.out.println("Pre-compressing graph before GA execution...");
+				System.out.println("Original graph size: " + this.GRAPH_SIZE);
+
+				LinkedGraph g = LinkedGraph.load(this.SOURCE_FILENAME);
+				// BronKerbosch
+				List<List<String>> adjacencyList = LinkedGraph.getAdjacencyListofList(this.SOURCE_FILENAME);
+				System.out.println("Finding cliques using Bron-Kerbosch algorithm..." + adjacencyList);
+				System.out.println("Clique composition: " + LinkedGraph.cliqueComposition(LinkedGraph.getAdjacencyListofList(this.SOURCE_FILENAME)));
+
+				// MergeSet()
+				((LinkedGraph) this.ORIGINAL_GRAPH).mergeList(adjacencyList);
+				// update the graph size and chromosome size after pre-compression
+				this.GRAPH_SIZE = ((LinkedGraph) this.ORIGINAL_GRAPH).getSize();
+				this.CHROMOSOME_SIZE = (int) Math.ceil(this.GRAPH_SIZE * this.COMPRESSION_RATE);
+				System.out.println("Pre-compression complete. New graph size: " + this.GRAPH_SIZE);
+				System.out.println("New chromosome size: " + this.CHROMOSOME_SIZE);
+			}
+
 			Chromosome globalBest = createChromosome();
 			Chromosome globalWorst = createChromosome();
 			long globalSum = 0;
@@ -722,10 +744,12 @@ public class GAImplementation {
 	private boolean buildData(String filename) {
 		buildDefaults();
 		try {
-			List<String> lines = Files.readAllLines(Paths.get(filename), Charset.defaultCharset());
+			System.out.println("Reading configuration from file: " + filename);
+			// List<String> lines = Files.readAllLines(Paths.get(filename), Charset.defaultCharset());
+			List<String> lines = Files.readAllLines(Paths.get("C:\\Users\\Aritra\\Documents\\GitHub\\GA_Graph_Compression\\LinkedGraph\\data\\in\\test1.dat"), Charset.defaultCharset());
 			for (String line : lines) {
 				String[] data = line.split("[\\s\\t:=]+");
-				//System.out.println("["+String.join(",",data)+"]");
+				// System.out.println("["+String.join(",",data)+"]");
 				if (data.length != 2) {
 					continue;
 				}

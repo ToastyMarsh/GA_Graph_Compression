@@ -1,5 +1,5 @@
 outPrefix ecoli
-source ecoli.txt
+source LinkedGraph/ecoli.txt
 generations 750
 population 250
 tournament 5

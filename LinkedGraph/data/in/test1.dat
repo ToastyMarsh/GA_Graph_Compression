@@ -1,5 +1,5 @@
 outPrefix test2-yeast
-source yeast.txt
+source LinkedGraph/yeast.txt
 generations 750
 population 250
 tournament 5
